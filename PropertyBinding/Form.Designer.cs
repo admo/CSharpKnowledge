@@ -31,8 +31,8 @@ namespace PropertyBinding
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.myPropertiesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.myPropertiesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,7 +40,6 @@ namespace PropertyBinding
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // textBox1
             // 
@@ -51,6 +50,11 @@ namespace PropertyBinding
             this.textBox1.Size = new System.Drawing.Size(164, 20);
             this.textBox1.TabIndex = 0;
             // 
+            // myPropertiesBindingSource
+            // 
+            this.myPropertiesBindingSource.AllowNew = false;
+            this.myPropertiesBindingSource.DataSource = typeof(PropertyBinding.MyProperties);
+            // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(3, 29);
@@ -59,11 +63,7 @@ namespace PropertyBinding
             this.textBox2.Size = new System.Drawing.Size(164, 20);
             this.textBox2.TabIndex = 1;
             // 
-            // myPropertiesBindingSource
-            // 
-            this.myPropertiesBindingSource.DataSource = typeof(PropertyBinding.MyProperties);
-            // 
-            // Example
+            // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -73,7 +73,7 @@ namespace PropertyBinding
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Example";
+            this.Name = "Form";
             this.Text = "Property binding";
             ((System.ComponentModel.ISupportInitialize)(this.myPropertiesBindingSource)).EndInit();
             this.ResumeLayout(false);

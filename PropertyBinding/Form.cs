@@ -12,27 +12,33 @@ namespace PropertyBinding
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        public MyProperties MyProperties1 = new MyProperties();
-        private MyProperties myProperties2 = new MyProperties();
+        private MyProperties myProperties = new MyProperties();
 
         public Form()
         {
             InitializeComponent();
 
-            // textBox1 is bounded in designer time
-            textBox2.DataBindings.Add("Text", myProperties2, "Property1");
+            // textBox1 is bounded in designer time, but we have to add data source manualy
+            myPropertiesBindingSource.Add(myProperties);
+
+            textBox2.DataBindings.Add("Text", myProperties, "Property2");
+
+            // Timer event configuration
+            timer1.Tick += new EventHandler((o, e) => ++myProperties.Property1);
+            timer1.Tick += new EventHandler((o, e) => --myProperties.Property2);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            ++MyProperties1.Property1;
-            ++myProperties2.Property1;
+            ++myProperties.Property1;
+            --myProperties.Property2;
         }
     }
 
     public class MyProperties : INotifyPropertyChanged
     {
         private int _property1;
+        private int _property2;
 
         public int Property1
         {
@@ -41,6 +47,17 @@ namespace PropertyBinding
             {
                 if (value == _property1) return;
                 _property1 = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int Property2
+        {
+            get => _property2;
+            set
+            {
+                if (value == _property2) return;
+                _property2 = value;
                 NotifyPropertyChanged();
             }
         }
